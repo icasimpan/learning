@@ -1,0 +1,16 @@
+version: "3.9"
+
+x-services-volume: &services-volume
+  type: bind
+  source: ./src
+  target: /home/pwsh
+
+services:
+  pwsh:
+    build:
+       context: .
+       dockerfile: "./docker/pwsh/Dockerfile"
+    image: ${PROJECT_NAME}_playground:${ENVIRONMENT}-${ENVIRONMENT_VERSION}
+    container_name: ${PROJECT_NAME}_playground
+    volumes:
+      - *services-volume
